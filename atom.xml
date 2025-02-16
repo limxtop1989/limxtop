@@ -12,7 +12,7 @@
     <category term="Android" />
     <entry>
         <id>https://limxtop1989.github.io/limxtop/2025/02/16/Android-command/</id>
-        <title>Android command</title>
+        <title>Android 提升开发效率常用命令指南</title>
         <link rel="alternate" href="https://limxtop1989.github.io/limxtop/2025/02/16/Android-command/"/>
         <content type="html">&lt;h1 id=&#34;概述&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#概述&#34;&gt;#&lt;/a&gt; 概述&lt;/h1&gt;
 &lt;p&gt;在 Android 开发过程中，命令行工具的使用能极大提升开发效率。命令行不仅能帮助开发者快速调试、自动化流程，还能在开发过程中快速定位问题、进行批量操作等，本文将详细展开介绍。&lt;/p&gt;
