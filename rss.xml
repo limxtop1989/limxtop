@@ -21,7 +21,7 @@
             <category term="Android, adb, egrep, 正则表达式，" scheme="https://limxtop1989.github.io/limxtop/tags/Android-adb-egrep-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%8C/" />
             <pubDate>Sun, 16 Feb 2025 11:23:48 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;概述&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#概述&#34;&gt;#&lt;/a&gt; 概述&lt;/h1&gt;
-&lt;p&gt;在 Android 开发过程中，命令行工具的使用能极大提升开发效率。命令行不仅能帮助开发者快速调试、自动化流程，还能在开发过程中快速定位问题、进行批量操作等，本文将详细展开介绍。&lt;/p&gt;
+&lt;p&gt;工欲善其事，必先利其器。在 Android 开发过程中，命令行工具的使用能极大提升开发效率。命令行不仅能帮助开发者快速调试、自动化流程，还能在开发过程中快速定位问题、进行批量操作等，本文将详细展开介绍。&lt;/p&gt;
 &lt;h1 id=&#34;log-过滤查询&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#log-过滤查询&#34;&gt;#&lt;/a&gt; Log 过滤查询&lt;/h1&gt;
 &lt;p&gt;日志分析时，我们时常需要将包含某个关键字的日志过滤出来，如果只是在一个文件里，使用文本编辑器都可以实现目的。但如果需要高级的查询条件，特别是待分析的日志散落在多个目录下，或者需要实时过滤  &lt;code&gt;adb logcat -b all&lt;/code&gt;  的输出时，命令行时最简洁高效但。比如我们需要在多个日志文件里，将 “18:20: 任意多个字符 keyword1 &amp;amp; 18:21: 任意多个字符 keyword1 &amp;amp; keyword2” 的日志过滤高亮显示出来，如下命令即可。&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-Bash&#34;&gt;egrep -irn --color &#39;18:2[01]:.*keyword1|keyword2&#39;
@@ -29,8 +29,10 @@
 &lt;p&gt;配合管道命令，就可以边操作，边实时过滤查看日志输出。代码怎么执行的，运行时逻辑大概一目了然。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;adb logcat -b all | egrep -in --color &#39;keyword1|keyword2&#39;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;每个系统命令都可以在 terminal 通过  &lt;code&gt;man&lt;/code&gt;  命令查询其 API，比如  &lt;code&gt;egrep&lt;/code&gt;  输入  &lt;code&gt;man egrep&lt;/code&gt;  获得其使用说明。&lt;/p&gt;
-&lt;p&gt;:important: &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvUmVndWxhcl9leHByZXNzaW9u&#34;&gt;正则表达式&lt;/span&gt;&lt;br /&gt;
-:important: 做开发总是要学会英语，阅读英文资料的，如何一年半载掌握英语阅读能力，见&lt;a href=&#34;&#34;&gt;英语自学指南&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;❤️ &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvUmVndWxhcl9leHByZXNzaW9u&#34;&gt;正则表达式&lt;/span&gt;&lt;br /&gt;
+❤️ 做开发总是要学会英语，阅读英文资料的，如何一年半载掌握英语阅读能力，见&lt;a href=&#34;&#34;&gt;英语自学指南&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h1 id=&#34;文本替换&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#文本替换&#34;&gt;#&lt;/a&gt; 文本替换&lt;/h1&gt;
 &lt;p&gt;我们可以使用 sed 命令来替换所有 Log.d 为 Log.i：&lt;/p&gt;
 &lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;find&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;.&lt;/span&gt; -name &lt;span class=&#34;token string&#34;&gt;&#34;*.java&#34;&lt;/span&gt; -exec &lt;span class=&#34;token function&#34;&gt;sed&lt;/span&gt; -i &lt;span class=&#34;token string&#34;&gt;&#39;s/Log\.d/Log\.i/g&#39;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt; +&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;ul&gt;
@@ -55,7 +57,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&#34;安装-apk&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安装-apk&#34;&gt;#&lt;/a&gt; 安装 apk&lt;/h1&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;adb &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; -r fileName.apk&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;ul&gt;
-&lt;li&gt;-b :  :important: Back up any existing files before overwriting them by renaming them to file.old.  See -B for specifying a different backup suffix.&lt;/li&gt;
+&lt;li&gt;-b : Back up any existing files before overwriting them by renaming them to file.old.  See -B for specifying a different backup suffix.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;adb push fileName.apk remote&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h1 id=&#34;应用卸载&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#应用卸载&#34;&gt;#&lt;/a&gt; 应用卸载&lt;/h1&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;adb shell pm uninstall com.example.MyApp&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h1 id=&#34;adb启动activity&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#adb启动activity&#34;&gt;#&lt;/a&gt; adb 启动 activity&lt;/h1&gt;
